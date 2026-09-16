@@ -1,0 +1,36 @@
+#include <iostream>
+#include <string>
+#include <vector>
+////////////////////////////////////////////////////above is #includes
+
+
+
+
+
+
+
+
+
+///////////////////////////////////////////////////above is functions
+int main(){
+
+std::vector<std::string> tasks;
+
+
+}
+
+
+
+
+
+
+
+
+///////////////////////////////////// above is int main (){}
+
+
+
+
+
+
+
