@@ -1,4 +1,4 @@
-
+#include <fstream>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -31,90 +31,91 @@ int menu()
 //////////////////////////////////
 
 
-/////////////////////////////////////////////////// above is functions
 
-
-int main()
+void fileman(std::vector<std::string>& tasks)
 {
+    std::ifstream tasklist("tasks.txt");
 
+    std::string lines;
 
-
-
-
-    std::vector<std::string> tasks;
-    /////////////
-while(true)
-{
-    int chosen = menu();
-
-    std::cout << "you chose: " << chosen << "\n\n\n";
-////////
-
-
-
-
-
-    if (chosen == 1)
+    while(std::getline(tasklist, lines))
     {
-        std::cout << "welcome to task viewer\n";
-
-        for(int i = 0;i < tasks.size();i++)
-        {
-            std::cout << i + 1 <<". " << tasks[i] << "\n";
-
-        }
+        tasks.push_back(lines);
     }
 
-
-//////////////////
-
-
-
-    else if(chosen == 2)
-    {
-
-        std::string newtask;
-        std::cout << "welcome to task add utility\n";
-
-        std::cout << "please enter taskname:";
-        std::cin.ignore();
-        std::getline(std::cin, newtask);
-
-        tasks.push_back(newtask);
-    }
-
-
-/////////////////
-
-
-    else if(chosen == 3)
-    {
-        std::cout << "welocme to task remover utility\n\n";
-
-         int tasknumber;
-
-         std::cout << "please enter task number:";
-         std::cin >> tasknumber;
-
-
-         tasks.erase(tasks.begin() + (tasknumber - 1));
-
-         std::cout << "task removed\n";
-    }
-
-////////////////////
-    else if(chosen == 4){
-
-        break;
-    }
 }
 
 
+/////////////////////////////////////////////////// above is functions
+int main()
+{
+    std::vector<std::string> tasks;
 
+    fileman(tasks);
+
+    while(true)
+    {
+        int chosen = menu();
+
+        std::cout << "you chose: " << chosen << "\n\n\n";
+
+        if(chosen == 1)
+        {
+            std::cout << "welcome to task viewer\n";
+
+            for(int i = 0; i < tasks.size(); i++)
+            {
+                std::cout << i + 1 << ". " << tasks[i] << "\n";
+            }
+        }
+
+        else if(chosen == 2)
+        {
+            std::string newtask;
+
+            std::cout << "welcome to task add utility\n";
+            std::cout << "please enter taskname:";
+
+            std::cin.ignore();
+            std::getline(std::cin, newtask);
+
+            tasks.push_back(newtask);
+        }
+
+        else if(chosen == 3)
+        {
+            std::cout << "welcome to task remover utility\n\n";
+
+            int tasknumber;
+
+            std::cout << "please enter task number:";
+            std::cin >> tasknumber;
+
+            tasks.erase(tasks.begin() + (tasknumber - 1));
+
+            std::cout << "task removed\n";
+        }
+
+        else if(chosen == 4)
+        {
+            break;
+        }
+    } // ← while ends HERE
+
+
+    // SAVE
+    std::ofstream taskfile("tasks.txt");
+
+    for(int j = 0; j < tasks.size(); j++)
+    {
+        taskfile << tasks[j] << "\n";
+    }
 
 
     return 0;
 }
+
+
 
 
 
